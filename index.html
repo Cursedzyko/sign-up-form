@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid login">
+        <!-- Login page -->
+        <div class="row justify-content-center align-items-center vh-100" id="loginPage">
+            <div class="box-login bg-danger rounded p-4">
+                <img src="./img/logo.png" alt="Game Logo" class="logo img-fluid mb-2">
+                <form action="/login-form" method="post" class="form-login">
+                    <input type="text" id="username" placeholder="Username" required minlength="5" maxlength="20" class="form-control form-control-lg mb-2">
+                    <input type="password" id="password" placeholder="Password" required minlength="6" maxlength="20" class="form-control form-control-lg mb-2">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+                    <a href="#" id="forgot-password" class="d-block text-decoration-none mt-2">Forgot your Password?</a>
+                </form>
+                <div class="login-footer mt-4">
+                    <a href="#" id="signupLink" class="text-decoration-none">
+                        <span class="footer-span text-dark">Don't have an Account?</span> Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sign up page -->
+        <div class="row justify-content-center align-items-center vh-100" id="signupPage">
+            <div class="box-login bg-danger rounded p-4">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
