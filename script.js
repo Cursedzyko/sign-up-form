@@ -156,4 +156,8 @@ function showRequests()
 	document.querySelector('.friends-box').style.display = 'none';
 }
 
-
+function setStatus(status)
+{
+	var statusSpan = document.querySelector('.status-dropdown > span');
+	statusSpan.textContent = status;
+}
