@@ -63,10 +63,21 @@
                 <!-- chat box -->
                 <!-- request box -->
                 <div class="friends-box">
-                    <a class="text-decoration-none" href="#" onclick="expandEffect(event)">
+                    <a id="addFriendLink" class="text-decoration-none" href="#" onclick="expandEffect(event)">
                         <span>Add Friend</span>
                         <div class="effect"></div> <!-- Effect div for animation -->
+
                     </a>
+                    <div class="overlay" id="overlay">
+                        <div id="friendBox" class="add-friend-box">
+                            <svg id="closeOverlay" class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="24" height="24">
+                                <path d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"/>
+                            </svg>
+                            <input type="text" id="FriendName" class="form-control mb-2" placeholder="Enter friend's nickname" minlength="5" maxlength="20">
+                            <button id="addFriendButton" class="btn btn-success">Add Friend</button>
+                        </div>
+                    </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat mauris non nibh hendrerit, sed consequat neque ultrices. Nulla nec ullamcorper libero. Proin ultricies sapien a lorem varius, a ullamcorper leo ultricies. Integer sit amet consectetur elit. Cras auctor purus ac ipsum interdum dapibus. Vivamus bibendum, justo at ullamcorper gravida, dui arcu ultrices velit, sed vehicula magna mauris eget sem. Proin nec sagittis orci. Cras vehicula nibh ut orci ultricies, non consequat felis volutpat. Sed sed metus at nulla blandit varius.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat mauris non nibh hendrerit, sed consequat neque ultrices. Nulla nec ullamcorper libero. Proin ultricies sapien a lorem varius, a ullamcorper leo ultricies. Integer sit amet consectetur elit. Cras auctor purus ac ipsum interdum dapibus. Vivamus bibendum, justo at ullamcorper gravida, dui arcu ultrices velit, sed vehicula magna mauris eget sem. Proin nec sagittis orci. Cras vehicula nibh ut orci ultricies, non consequat felis volutpat. Sed sed metus at nulla blandit varius.</p>
                 </div>

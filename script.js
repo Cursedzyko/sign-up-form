@@ -67,6 +67,30 @@ document.addEventListener('DOMContentLoaded', function()
 
 	var firstLinkG = document.querySelector('.game-links a:first-child');
 	addBorderM(firstLinkG);
+
+
+	document.getElementById('addFriendLink').addEventListener('click', function(event) {
+		event.preventDefault();
+		document.getElementById('overlay').style.display = 'block';
+	  });
+	
+	//   Need to think how to add friend 
+	document.getElementById('addFriendButton').addEventListener('click', function() {
+		// Add your logic to handle adding a friend here
+		// For demonstration purposes, let's just close the overlay
+		document.getElementById('FriendName').value = "";
+		document.getElementById('overlay').style.display = 'none';
+	});
+	
+	document.getElementById('closeOverlay').addEventListener('click', function() {
+		document.getElementById('overlay').style.display = 'none';
+	});
+	
+	document.addEventListener('keydown', function(event) {
+		if (event.key === 'Escape') {
+			document.getElementById('overlay').style.display = 'none';
+		}
+	});
 });
 
 
