@@ -76,8 +76,25 @@ document.addEventListener('DOMContentLoaded', function()
 	
 	//   Need to think how to add friend 
 	document.getElementById('addFriendButton').addEventListener('click', function() {
-		// Add your logic to handle adding a friend here
-		// For demonstration purposes, let's just close the overlay
+		// Get the input value
+		var friendName = document.getElementById('FriendName').value.trim();
+	
+		// Check if the input is not empty
+		if (friendName !== "") {
+			// Assume friendExists() is a function that checks if the friend already exists
+			// if (friendExists(friendName)) {
+				// If the friend exists, create the friend box
+				createFriendBox(friendName);
+			// } else {
+			// 	// If the friend doesn't exist, show an error message or handle it accordingly
+			// 	alert("This friend doesn't exist!");
+			// }
+		} else {
+			// If the input is empty, show an error message or handle it accordingly
+			alert("Please enter a friend's nickname!");
+		}
+	
+		// Clear the input field and close the overlay
 		document.getElementById('FriendName').value = "";
 		document.getElementById('overlay').style.display = 'none';
 	});
@@ -91,6 +108,22 @@ document.addEventListener('DOMContentLoaded', function()
 			document.getElementById('overlay').style.display = 'none';
 		}
 	});
+
+
+	document.getElementById('PlayWithFriendButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('overlayPlay').style.display = 'block';
+    });
+
+    document.getElementById('closeOverlayPlay').addEventListener('click', function() {
+        document.getElementById('overlayPlay').style.display = 'none';
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            document.getElementById('overlayPlay').style.display = 'none';
+        }
+    });
 });
 
 
@@ -193,4 +226,23 @@ function setStatus(status)
 		statusSpan.innerHTML = 'Offline';
 		statusSpan.innerHTML += '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--noto" preserveAspectRatio="xMidYMid meet" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><circle cx="63.93" cy="64" r="60" fill="#c33"></circle><circle cx="60.03" cy="63.1" r="56.1" fill="#f44336"></circle><path d="M23.93 29.7c4.5-7.1 14.1-13 24.1-14.8c2.5-.4 5-.6 7.1.2c1.6.6 2.9 2.1 2 3.8c-.7 1.4-2.6 2-4.1 2.5a44.64 44.64 0 0 0-23 17.4c-2 3-5 11.3-8.7 9.2c-3.9-2.3-3.1-9.5 2.6-18.3z" fill="#ff8a80"></path></g></svg>';
 	}
+}
+
+function friendExists(name) {
+    // Add your logic to check if the friend exists, for example, you might have a list of existing friends
+    // and you can check if the name is in that list
+    // For demonstration purposes, let's assume a list of existing friends
+    var existingFriends = ['Friend1', 'Friend2', 'Friend3'];
+    return existingFriends.includes(name);
+}
+
+// Function to create the friend box
+function createFriendBox(name) {
+    var friendBox = document.createElement('a');
+    friendBox.classList.add('friend-mini-box');
+    friendBox.textContent = name;
+	console.log("HERE");
+    // Append the friend box to a container where you want to display the friend boxes
+    var friendsContainer = document.getElementById('friendsBox');
+    friendsContainer.appendChild(friendBox);
 }
