@@ -1,129 +1,111 @@
 document.addEventListener('DOMContentLoaded', function()
 {
 	const loginPage = document.getElementById("loginPage");
-	const signupPage = document.getElementById("signupPage");
-	const signupLink = document.getElementById("signupLink");
+	const signUpPage = document.getElementById("signUpPage1");
+	const signUpLink = document.getElementById("signupLink");
 
-	const mainpageLink = document.getElementById("mainPageLink");
-	const mainPage = document.getElementById("mainPage");
 
-	function showLoginPage()
-	{
-		loginPage.style.display = 'flex';
-		signupPage.style.display = 'none';
-		mainPage.style.display = 'none';
-	}
-
-	function showSignupPage()
-	{
-		signupPage.style.display = 'flex';
-		loginPage.style.display = 'none';
-		mainPage.style.display = 'none';
-	}
-
-	function showMainPage()
-	{
-		loginPage.style.display = 'none';
-		signupPage.style.display = 'none';
-		mainPage.style.display = 'flex';
-	}
-
-	showLoginPage();
-
-	signupLink.addEventListener('click', function(event)
-	{
+	console.log(signUpLink);
+	signUpLink.addEventListener('click', function(event) {
 		event.preventDefault();
-		showSignupPage();
+		fetch(`{% url 'signup' %}`)
+			.then(response => response.text())
+			.then(data => {
+				loginPage.classList.add('hidden');
+				signUpPage.innerHTML = data;
+				signUpPage.classList.remove('hidden');
+			})
+			.catch(error => console.error('Error fetching sign-up page:', error));
 	});
 
-	mainpageLink.addEventListener('click', function(event)
-	{
-		event.preventDefault();
-		showMainPage();
-	});
+	// mainpageLink.addEventListener('click', function(event)
+	// {
+	// 	event.preventDefault();
+	// 	showMainPage();
+	// });
 
-	const avatarCircle = document.getElementById('avatarCircle');
-	const avatars = [
-	  './img/avatar1.png',
-	  './img/avatar2.png',
-	  './img/avatar3.png',
-	  './img/avatar4.png',
-	  './img/avatar5.png',
-	  './img/avatar6.png'
-	];
-	let currentAvatarIndex = 0;
+	// const avatarCircle = document.getElementById('avatarCircle');
+	// const avatars = [
+	//   './img/avatar1.png',
+	//   './img/avatar2.png',
+	//   './img/avatar3.png',
+	//   './img/avatar4.png',
+	//   './img/avatar5.png',
+	//   './img/avatar6.png'
+	// ];
+	// let currentAvatarIndex = 0;
   
-	avatarCircle.addEventListener('click', () => {
-	  currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
-	  updateAvatar();
-	});
+	// avatarCircle.addEventListener('click', () => {
+	//   currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
+	//   updateAvatar();
+	// });
   
-	function updateAvatar() {
-	  avatarCircle.querySelector('img').src = avatars[currentAvatarIndex];
-	}
+	// function updateAvatar() {
+	//   avatarCircle.querySelector('img').src = avatars[currentAvatarIndex];
+	// }
 
-	var firstLinkF = document.querySelector('.side-links a:first-child');
-    addBorder(firstLinkF);
+	// var firstLinkF = document.querySelector('.side-links a:first-child');
+    // addBorder(firstLinkF);
 
-	var firstLinkG = document.querySelector('.game-links a:first-child');
-	addBorderM(firstLinkG);
+	// var firstLinkG = document.querySelector('.game-links a:first-child');
+	// addBorderM(firstLinkG);
 
 
-	document.getElementById('addFriendLink').addEventListener('click', function(event) {
-		event.preventDefault();
-		document.getElementById('overlay').style.display = 'block';
-	  });
+	// document.getElementById('addFriendLink').addEventListener('click', function(event) {
+	// 	event.preventDefault();
+	// 	document.getElementById('overlay').style.display = 'block';
+	//   });
 	
-	//   Need to think how to add friend 
-	document.getElementById('addFriendButton').addEventListener('click', function() {
-		// Get the input value
-		var friendName = document.getElementById('FriendName').value.trim();
+	// //   Need to think how to add friend 
+	// document.getElementById('addFriendButton').addEventListener('click', function() {
+	// 	// Get the input value
+	// 	var friendName = document.getElementById('FriendName').value.trim();
 	
-		// Check if the input is not empty
-		if (friendName !== "") {
-			// Assume friendExists() is a function that checks if the friend already exists
-			// if (friendExists(friendName)) {
-				// If the friend exists, create the friend box
-				createFriendBox(friendName);
-			// } else {
-			// 	// If the friend doesn't exist, show an error message or handle it accordingly
-			// 	alert("This friend doesn't exist!");
-			// }
-		} else {
-			// If the input is empty, show an error message or handle it accordingly
-			alert("Please enter a friend's nickname!");
-		}
+	// 	// Check if the input is not empty
+	// 	if (friendName !== "") {
+	// 		// Assume friendExists() is a function that checks if the friend already exists
+	// 		// if (friendExists(friendName)) {
+	// 			// If the friend exists, create the friend box
+	// 			createFriendBox(friendName);
+	// 		// } else {
+	// 		// 	// If the friend doesn't exist, show an error message or handle it accordingly
+	// 		// 	alert("This friend doesn't exist!");
+	// 		// }
+	// 	} else {
+	// 		// If the input is empty, show an error message or handle it accordingly
+	// 		alert("Please enter a friend's nickname!");
+	// 	}
 	
-		// Clear the input field and close the overlay
-		document.getElementById('FriendName').value = "";
-		document.getElementById('overlay').style.display = 'none';
-	});
+	// 	// Clear the input field and close the overlay
+	// 	document.getElementById('FriendName').value = "";
+	// 	document.getElementById('overlay').style.display = 'none';
+	// });
 	
-	document.getElementById('closeOverlay').addEventListener('click', function() {
-		document.getElementById('overlay').style.display = 'none';
-	});
+	// document.getElementById('closeOverlay').addEventListener('click', function() {
+	// 	document.getElementById('overlay').style.display = 'none';
+	// });
 	
-	document.addEventListener('keydown', function(event) {
-		if (event.key === 'Escape') {
-			document.getElementById('overlay').style.display = 'none';
-		}
-	});
+	// document.addEventListener('keydown', function(event) {
+	// 	if (event.key === 'Escape') {
+	// 		document.getElementById('overlay').style.display = 'none';
+	// 	}
+	// });
 
 
-	document.getElementById('PlayWithFriendButton').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('overlayPlay').style.display = 'block';
-    });
+	// document.getElementById('PlayWithFriendButton').addEventListener('click', function(event) {
+    //     event.preventDefault();
+    //     document.getElementById('overlayPlay').style.display = 'block';
+    // });
 
-    document.getElementById('closeOverlayPlay').addEventListener('click', function() {
-        document.getElementById('overlayPlay').style.display = 'none';
-    });
+    // document.getElementById('closeOverlayPlay').addEventListener('click', function() {
+    //     document.getElementById('overlayPlay').style.display = 'none';
+    // });
 
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            document.getElementById('overlayPlay').style.display = 'none';
-        }
-    });
+    // document.addEventListener('keydown', function(event) {
+    //     if (event.key === 'Escape') {
+    //         document.getElementById('overlayPlay').style.display = 'none';
+    //     }
+    // });
 });
 
 
