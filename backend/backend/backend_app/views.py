@@ -4,7 +4,7 @@ from django.conf import settings
 import urllib.parse
 import secrets
 from django.contrib.auth.models import User
-from django .contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import logout, authenticate, login as auth_login
 from django.contrib import messages
 
 def login(request):
@@ -53,6 +53,9 @@ def login_view(request):
             return render(request, 'login.html')
     return render(request, 'login.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 
 def authorize(request):
     state = secrets.token_urlsafe(16)
