@@ -132,3 +132,12 @@ FORTYTWO_AUTH_URL = 'https://api.intra.42.fr/oauth/authorize'
 FORTYTWO_CLIENT_ID = 'u-s4t2ud-0100c84c9571f0038bb00b43dd71dece8fe33ce343dc90486c300846eae5f32f'
 
 FORTYTWO_REDIRECT_URI = 'http://127.0.0.1:8000/personal-info/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ponggame4@gmail.com'
+EMAIL_HOST_PASSWORD = 'hmrd rnwt txbk hzys'
+
+# need to create env for the passwords and special things
