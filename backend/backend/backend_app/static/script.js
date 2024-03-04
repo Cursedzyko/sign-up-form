@@ -10,34 +10,32 @@ document.addEventListener('DOMContentLoaded', function()
             .then(data => {
                 content.innerHTML = data;
             })
-            .catch(error => console.error('Error fetching signup page:', error));
+            .catch(error => console.error('Error fetching signup page:', error))
+            .finally(() => {
+                attachProfilePicListener(); // Re-attach event listener after loading sign-up page
+            });
     });
 
-	// mainpageLink.addEventListener('click', function(event)
-	// {
-	// 	event.preventDefault();
-	// 	showMainPage();
-	// });
+    // Function to attach event listener to profile_pic
+    function attachProfilePicListener() {
+        document.addEventListener('change', function(event) {
+            if (event.target && event.target.id === 'profile_pic') {
+                var previewContainer = document.getElementById('preview-container');
+                previewContainer.innerHTML = '';
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '200px';
+                    previewContainer.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
 
-	// const avatarCircle = document.getElementById('avatarCircle');
-	// const avatars = [
-	//   './img/avatar1.png',
-	//   './img/avatar2.png',
-	//   './img/avatar3.png',
-	//   './img/avatar4.png',
-	//   './img/avatar5.png',
-	//   './img/avatar6.png'
-	// ];
-	// let currentAvatarIndex = 0;
-  
-	// avatarCircle.addEventListener('click', () => {
-	//   currentAvatarIndex = (currentAvatarIndex + 1) % avatars.length;
-	//   updateAvatar();
-	// });
-  
-	// function updateAvatar() {
-	//   avatarCircle.querySelector('img').src = avatars[currentAvatarIndex];
-	// }
 
 	// var firstLinkF = document.querySelector('.side-links a:first-child');
     // addBorder(firstLinkF);

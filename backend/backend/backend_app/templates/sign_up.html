@@ -18,11 +18,10 @@
             <form action="{% url 'signup_view' %}" method="post" class="form-signup">
                 {% csrf_token %}
                 <div class="signupTop">
-                    <div class="avatar-circle" id="avatarCircle">
-                        <img src="{% static 'img/avatar1.png' %}" alt="Avatar">
-                    </div>                                                    
-                    <input type="text" minlength="5" maxlength="20" name="usernamesignup" placeholder="Username" id="usernamesignup" class="form-control form-control-lg mb-2" required>
+                        <div id="preview-container"></div>
+                        <input type="file" name="profile_picture" id="profile_pic" accept="image/*" class="form-control-file">
                 </div>                                        
+                <input type="text" minlength="5" maxlength="20" name="usernamesignup" placeholder="Username" id="usernamesignup" class="form-control form-control-lg mb-2" required>
                 <input type="email" name="emailsignup" id="emailsignup" placeholder="Email" class="form-control form-control-lg mb-2" required>
                 <input type="password" name="passwordsignup" id="passwordsignup" placeholder="Password" minlength="5" maxlength="20" class="form-control form-control-lg mb-2">
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
