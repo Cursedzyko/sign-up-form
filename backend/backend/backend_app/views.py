@@ -12,6 +12,7 @@ from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
 from django.urls import reverse
 from .models import UserProfile
+from django.contrib.auth.decorators import login_required
 
 
 def login(request):
@@ -25,10 +26,13 @@ def personal_info(request):
         return redirect('/')
     return render(request, 'personal_info.html')
 
+@login_required
 def home_view(request):
+    if request.user.is_authenticated:
+        print("User is authenticated")
+    else:
+        print("User is not authenticated")
     return render(request, 'home.html')
-
-from .models import UserProfile  # Import UserProfile model
 
 def signup_view(request):
     if request.method == 'POST':

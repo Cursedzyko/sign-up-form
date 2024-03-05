@@ -140,4 +140,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'ponggame4@gmail.com'
 EMAIL_HOST_PASSWORD = 'hmrd rnwt txbk hzys'
 
+
+LOGIN_URL = '/'
 # need to create env for the passwords and special things
