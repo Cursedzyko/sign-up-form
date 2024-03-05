@@ -12,15 +12,18 @@
     <title>Sign Up</title>
 </head>
 <body>
-    <div class="row justify-content-center align-items-center vh-100" id="signupPage">
+    <div class="row justify-content-center align-items-center vh-100 signupP" id="signupPage">
         <div class="box-signup bg-danger rounded p-4">
             <img src="{% static 'img/logo.png' %}" alt="Game Logo" class="logo img-fluid mb-2">
             <form action="{% url 'signup_view' %}" method="post" class="form-signup">
                 {% csrf_token %}
-                <div class="signupTop">
-                        <div id="preview-container"></div>
-                        <input type="file" name="profile_picture" id="profile_pic" accept="image/*" class="form-control-file">
-                </div>                                        
+                {% if messages %}
+                <div class="alert alert-danger error-message" role="alert">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}                                       
                 <input type="text" minlength="5" maxlength="20" name="usernamesignup" placeholder="Username" id="usernamesignup" class="form-control form-control-lg mb-2" required>
                 <input type="email" name="emailsignup" id="emailsignup" placeholder="Email" class="form-control form-control-lg mb-2" required>
                 <input type="password" name="passwordsignup" id="passwordsignup" placeholder="Password" minlength="5" maxlength="20" class="form-control form-control-lg mb-2">

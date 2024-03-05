@@ -36,6 +36,13 @@ def signup_view(request):
         email = request.POST.get('emailsignup')
         password = request.POST.get('passwordsignup')
 
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists. Please choose a different one.')
+            return render(request, 'sign_up.html')
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email address already exists. Please use a different one.')
+            return render(request, 'sign_up.html')
+
         user = User.objects.create_user(username=username, email=email, password=password)
 
         UserProfile.objects.create(user=user)

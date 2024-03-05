@@ -2,39 +2,21 @@ document.addEventListener('DOMContentLoaded', function()
 {
 	const content = document.getElementById("content");
     const signupLink = document.getElementById("signupLink");
-
-    signupLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        fetch(signupURL)
-            .then(response => response.text())
-            .then(data => {
-                content.innerHTML = data;
-            })
-            .catch(error => console.error('Error fetching signup page:', error))
-            .finally(() => {
-                attachProfilePicListener(); // Re-attach event listener after loading sign-up page
-            });
-    });
-
-    // Function to attach event listener to profile_pic
-    function attachProfilePicListener() {
-        document.addEventListener('change', function(event) {
-            if (event.target && event.target.id === 'profile_pic') {
-                var previewContainer = document.getElementById('preview-container');
-                previewContainer.innerHTML = '';
-                var file = event.target.files[0];
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    var img = document.createElement('img');
-                    img.src = event.target.result;
-                    img.style.maxWidth = '100%';
-                    img.style.maxHeight = '200px';
-                    previewContainer.appendChild(img);
-                }
-                reader.readAsDataURL(file);
-            }
+    if(signupLink)
+    {
+        signupLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            fetch(signupURL)
+                .then(response => response.text())
+                .then(data => {
+                    content.innerHTML = data;
+                })
+                .catch(error => console.error('Error fetching signup page:', error))
+                .finally(() => {
+                });
         });
     }
+
 
 
 	// var firstLinkF = document.querySelector('.side-links a:first-child');

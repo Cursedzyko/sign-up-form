@@ -6,8 +6,12 @@ body, html {
     font-family: "Anta", sans-serif;
 }
 
-#content {
+#content, .signupP {
     background-color: #131426 !important;
+}
+
+.signupP{
+    margin: 0 !important;
 }
 
 .box-login, .box-signup {
