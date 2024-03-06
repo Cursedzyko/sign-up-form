@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -125,21 +127,22 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+load_dotenv()
 
-FORTYTWO_AUTH_URL = 'https://api.intra.42.fr/oauth/authorize'
-
-FORTYTWO_CLIENT_ID = 'u-s4t2ud-0100c84c9571f0038bb00b43dd71dece8fe33ce343dc90486c300846eae5f32f'
-
-FORTYTWO_REDIRECT_URI = 'http://127.0.0.1:8000/personal-info/'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ponggame4@gmail.com'
-EMAIL_HOST_PASSWORD = 'hmrd rnwt txbk hzys'
+DEFAULT_AUTO_FIELD = os.environ.get('DEFAULT_AUTO_FIELD')
+FORTYTWO_AUTH_URL = os.environ.get('FORTYTWO_AUTH_URL')
+FORTYTWO_CLIENT_ID = os.environ.get('FORTYTWO_CLIENT_ID')
+FORTYTWO_REDIRECT_URI = os.environ.get('FORTYTWO_REDIRECT_URI')
 
 
-LOGIN_URL = '/'
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT'))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS') == 'True'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
+
+
 # need to create env for the passwords and special things
