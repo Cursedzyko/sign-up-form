@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.urls import reverse
 from .models import UserProfile
 from django.contrib.auth.decorators import login_required
+import re
 
 
 def login(request):
@@ -24,7 +25,7 @@ def signup(request):
 def personal_info(request):
     if 'error' in request.GET:
         return redirect('/')
-    return render(request, 'personal_info.html')
+    return render(request, 'nickname.html')
 
 @login_required
 def home_view(request):
@@ -39,6 +40,17 @@ def signup_view(request):
         username = request.POST.get('usernamesignup')
         email = request.POST.get('emailsignup')
         password = request.POST.get('passwordsignup')
+
+        #pass policy
+        if not re.findall('[A-Z]', password):
+            messages.error(request, 'Password must contain at least one uppercase letter, one digit, one symbol.')
+            return render(request, 'sign_up.html')
+        if not re.findall('[0-9]', password):
+            messages.error(request, 'Password must contain at least one uppercase letter, one digit, one symbol')
+            return render(request, 'sign_up.html')
+        if not re.findall('[!@#$%^&*(),.?":{}|<>]', password):
+            messages.error(request, 'Password must contain at least one uppercase letter, one digit, one symbol')
+            return render(request, 'sign_up.html')
 
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists. Please choose a different one.')

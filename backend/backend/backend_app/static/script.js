@@ -1,23 +1,5 @@
 document.addEventListener('DOMContentLoaded', function()
 {
-	const content = document.getElementById("content");
-    const signupLink = document.getElementById("signupLink");
-    if(signupLink)
-    {
-        signupLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            fetch(signupURL)
-                .then(response => response.text())
-                .then(data => {
-                    content.innerHTML = data;
-                })
-                .catch(error => console.error('Error fetching signup page:', error))
-                .finally(() => {
-                });
-        });
-    }
-
-
 
 	// var firstLinkF = document.querySelector('.side-links a:first-child');
     // addBorder(firstLinkF);
