@@ -43,5 +43,5 @@ python3 manage.py runserver
 
 python manage.py createsuperuser
 
-
+Frontend in the /home/zyko/sign-up-form/backend/backend/backend_app/templates || /home/zyko/sign-up-form/backend/backend/backend_app/static
 
