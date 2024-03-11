@@ -1,0 +1,22 @@
+Install django:
+
+pip install django
+
+Install packages:
+
+// for the env vars
+pip install python-dotenv
+
+// check if dotenv installed
+pip list | grep python-dotenv  
+
+
+Install Postgre:
+
+sudo apt update
+
+sudo apt install postgresql postgresql-contrib
+
+Create env var if it doesnt exists in dir = sign-up-form/backend/backend/backend/.env
+
+
