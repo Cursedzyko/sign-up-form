@@ -32,3 +32,16 @@ touch .env
 // Then copy paste from .env.txt
 
 
+//Run server: in the dir /home/zyko/sign-up-form/backend/backend/
+
+python manage.py migrate
+
+python3 manage.py runserver
+
+
+// If you wanna create super user(admin):
+
+python manage.py createsuperuser
+
+
+
