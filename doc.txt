@@ -11,12 +11,24 @@ pip install python-dotenv
 pip list | grep python-dotenv  
 
 
-Install Postgre:
+//Install Postgre:
 
 sudo apt update
 
 sudo apt install postgresql postgresql-contrib
 
-Create env var if it doesnt exists in dir = sign-up-form/backend/backend/backend/.env
+//Create env var if it doesnt exists in dir = sign-up-form/backend/backend/backend/.env
+
+cd sign-up-form/backend/backend/backend/
+
+//Check if it is exists:
+
+ls -la
+
+//if not Create
+
+touch .env
+
+// Then copy paste from .env.txt
 
 
