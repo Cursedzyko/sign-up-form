@@ -27,6 +27,9 @@ def personal_info(request):
         return redirect('/')
     return render(request, 'nickname.html')
 
+def forgot_password(request):
+    return render(request, 'password_reset.html')
+
 @login_required
 def home_view(request):
     if request.user.is_authenticated:
