@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.urls import reverse
 from .models import UserProfile
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
 import re
 
 
@@ -73,7 +74,7 @@ def signup_view(request):
         send_mail(
             'Verify your email for our awesome site',
             f'Please click the following link to verify your email address: {verification_link}',
-            'from@example.com',
+            'from@example.com', # need to change
             [email],
             fail_silently=False,
         )
@@ -134,6 +135,41 @@ def login_view(request):
     return render(request, 'login.html')
 
 
+def password_reset(request):
+    print('HERE')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('emailsignup')
+
+        if not (username and email):
+            messages.error(request, 'Please provide both username and email.')
+            return render(request, 'password_reset.html') 
+            
+        try:
+            user = User.objects.get(username=username, email=email)
+        except User.DoesNotExist:
+            messages.error(request, 'Invalid username or email.')
+            return render(request, 'password_reset.html') 
+
+        if user.userprofile.email_verified:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uid, token]))
+            print('HE:Lo')
+            send_mail(
+                'Reset your password',
+                f'Please click the following link to reset your password: {reset_link}',
+                'from@example.com', #need to enter
+                [email],
+                fail_silently=False,
+            )
+
+            messages.success(request, 'Password reset link has been sent to your email.')
+        else:
+            messages.error(request, 'Your email is not verified. Please verify your email before resetting your password.')
+            return render(request, 'password_reset.html')
+
+    return render(request, 'password_reset.html')
 
 def logout_view(request):
     logout(request)
