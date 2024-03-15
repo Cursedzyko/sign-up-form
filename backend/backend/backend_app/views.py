@@ -154,7 +154,7 @@ def password_reset(request):
         if user.userprofile.email_verified:
             token = default_token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
-            reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uid, token]))
+            reset_link = request.build_absolute_uri(reverse('set_new_password', args=[uid, token]))
             print('HE:Lo')
             send_mail(
                 'Reset your password',
@@ -170,6 +170,19 @@ def password_reset(request):
             return render(request, 'password_reset.html')
 
     return render(request, 'password_reset.html')
+
+def set_new_password(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        return render(request, 'set_new_password.html')
+    else:
+        return HttpResponseBadRequest('Invalid password reset link.')
+
 
 def logout_view(request):
     logout(request)
