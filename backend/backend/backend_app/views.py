@@ -14,6 +14,7 @@ from django.urls import reverse
 from .models import UserProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth import update_session_auth_hash
 import re
 
 
@@ -182,6 +183,40 @@ def set_new_password(request, uidb64, token):
         return render(request, 'set_new_password.html')
     else:
         return HttpResponseBadRequest('Invalid password reset link.')
+
+def submit_new_password(request):
+    if request.method == 'POST':
+        username = request.POST.get('usernamesignup')
+        password = request.POST.get('passwordreset')
+        confirm_password = request.POST.get('passwordconfirm')
+        
+        # Check if passwords match
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'set_new_password.html')
+
+        try:
+            # Fetch user based on the provided username
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            messages.error(request, 'User does not exist.')
+            return render(request, 'set_new_password.html')
+
+        # Set the new password for the user
+        user.set_password(password)
+        user.save()
+
+        # Update the session authentication hash
+        update_session_auth_hash(request, user)
+
+        # Display success message and redirect to login page
+        messages.success(request, 'Your password has been updated successfully.')
+        return redirect('login')
+
+    else:
+        return HttpResponseNotAllowed(['POST'])
+
+
 
 
 def logout_view(request):
