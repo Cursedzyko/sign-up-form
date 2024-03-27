@@ -190,26 +190,32 @@ def submit_new_password(request):
         password = request.POST.get('passwordreset')
         confirm_password = request.POST.get('passwordconfirm')
         
-        # Check if passwords match
         if password != confirm_password:
             messages.error(request, 'Passwords do not match.')
             return render(request, 'set_new_password.html')
 
+
+        if not re.findall('[A-Z]', password):
+            messages.error(request, 'Password must contain at least one uppercase letter.')
+            return render(request, 'set_new_password.html')
+        if not re.findall('[0-9]', password):
+            messages.error(request, 'Password must contain at least one digit.')
+            return render(request, 'set_new_password.html')
+        if not re.findall('[!@#$%^&*(),.?":{}|<>]', password):
+            messages.error(request, 'Password must contain at least one symbol.')
+            return render(request, 'set_new_password.html')
+        
         try:
-            # Fetch user based on the provided username
             user = User.objects.get(username=username)
         except User.DoesNotExist:
             messages.error(request, 'User does not exist.')
             return render(request, 'set_new_password.html')
 
-        # Set the new password for the user
         user.set_password(password)
         user.save()
 
-        # Update the session authentication hash
         update_session_auth_hash(request, user)
 
-        # Display success message and redirect to login page
         messages.success(request, 'Your password has been updated successfully.')
         return redirect('login')
 
